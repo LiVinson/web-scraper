@@ -1,6 +1,6 @@
-var express = require("express");
+var express = require("express"); //server
 var bodyParser = require("body-parser");
-var logger = require("morgan");
+var logger = require("morgan"); //logs HTTP methods
 var mongoose = require("mongoose");
 
 
@@ -15,8 +15,6 @@ var PORT = 3000;
 // Initialize Express
 var app = express();
 
-// Configure middleware
-
 // Use morgan logger for logging requests
 app.use(logger("dev"));
 // Use body-parser for handling form submissions
@@ -25,6 +23,16 @@ app.use(bodyParser.urlencoded({
 }));
 // Use express.static to serve the public folder as a static directory
 app.use(express.static("public"));
+
+var exphbs = require("express-handlebars");
+
+app.engine("handlebars", exphbs({
+  defaultLayout: "main"
+}));
+app.set("view engine", "handlebars");
+
+//Require routes:
+
 
 // By default mongoose uses callbacks for async queries, we're setting it to use promises (.then syntax) instead
 // Connect to the Mongo DB
@@ -63,6 +71,16 @@ app.get("/scrape", function (req, res) {
 });
 
 //GET
+
+app.get("/articles", function(req, res) {
+    db.Article.find({}).then(function(results) {
+        // console.log(results);
+        var hbsObject = {
+            article: results
+        };
+        res.render("index", hbsObject);
+    });
+});
 
 // Start the server
 app.listen(PORT, function () {

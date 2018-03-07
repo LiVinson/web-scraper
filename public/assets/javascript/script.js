@@ -1,8 +1,7 @@
 //On home page,
-    //GET request: articles, function(response) {
-        //do any necessary formatting
-        //render to handlebars
-    //}
+$.getJSON("/articles", function(data) {
+    console.log(data);
+});
 
 
     //On click of article:
