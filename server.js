@@ -1,19 +1,19 @@
-const express = require("express");
-const bodyParser = require("body-parser");
-const logger = require("morgan");
-const mongoose = require("mongoose");
+var express = require("express");
+var bodyParser = require("body-parser");
+var logger = require("morgan");
+var mongoose = require("mongoose");
 
 
-const axios = require("axios");
-const cheerio = require("cheerio");
+var axios = require("axios");
+var cheerio = require("cheerio");
 
 // Require all models
-const db = require("./models");
+var db = require("./models");
 
-const PORT = 3000;
+var PORT = 3000;
 
 // Initialize Express
-const app = express();
+var app = express();
 
 // Configure middleware
 
@@ -28,31 +28,40 @@ app.use(express.static("public"));
 
 // By default mongoose uses callbacks for async queries, we're setting it to use promises (.then syntax) instead
 // Connect to the Mongo DB
+var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/mongoHeadlines";
 mongoose.Promise = Promise;
-mongoose.connect("mongodb://localhost/myapp");
+mongoose.connect(MONGODB_URI);
 
-const url = `https://www.reddit.com/r/worldnews/`;
+app.get("/scrape", function (req, res) {
+    var url = `https://www.reddit.com/r/worldnews/`;
 
-axios
-    .get(url)
-    .then((response) => {
+    axios
+        .get(url)
+        .then((response) => {
 
-        const $ = cheerio.load(response.data);
+            var $ = cheerio.load(response.data);
 
-        let results = [];
+            $("div.top-matter").each((i, element) => {
 
-        $("div.top-matter").each((i, element) => {
-            const title = $(element).children("p.title").text();
-            const link = $(element).find("p").find("a").attr("href");
-            // const link = $(element).children().attr("href");
-            results.push({
-                title,
-                link
+                var results = {};
+                results.title = $(element).find("p.title").find("a.title").text();
+                results.link = $(element).find("p").find("a").attr("href");
+                results.source = $(element).find("p.title").find("span.domain").find("a").text();
+                //Create a new Article for each scraped result
+                db.Article.create(results)
+                    .then(function (response) {
+                        // console.log(response);
+                    })
+                    .catch(function (err) {
+                        return res.json(err)
+                    })
             });
 
-
+            res.send("Scrape Complete");
         })
-        console.log(results)
-    }).catch(error => {
-        console.log(error);
-    });
+});
+
+// Start the server
+app.listen(PORT, function () {
+    console.log("App running on port " + PORT + "!");
+});
