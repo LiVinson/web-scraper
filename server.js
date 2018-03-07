@@ -32,6 +32,7 @@ var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/mongoHeadlines
 mongoose.Promise = Promise;
 mongoose.connect(MONGODB_URI);
 
+//GET Method - Scrape from site, and add unique articles to db.
 app.get("/scrape", function (req, res) {
     var url = `https://www.reddit.com/r/worldnews/`;
 
@@ -60,6 +61,8 @@ app.get("/scrape", function (req, res) {
             res.send("Scrape Complete");
         })
 });
+
+//GET
 
 // Start the server
 app.listen(PORT, function () {
