@@ -1,5 +1,5 @@
 //On home page - GET request for all articles from Article collection
-$.getJSON("/articles", function(data) {
+$.getJSON("/", function(data) {
     console.log(data);
 });
 
@@ -43,28 +43,38 @@ $("#add-note-btn").on("click", function(event) {
         location.reload();
     })
 
-})
+});
 
 $(".delete-note").on("click", function(event) {
     console.log("delete clicked");
     event.preventDefault();
     var noteId = $(this).attr("data-id");
-    
+    console.log(noteId)
     $(this).parents('div.comment-div').hide();
 
 
-    $ajax({
+    $.ajax({
         method: "DELETE",
-        url: `note/${noteId}`
+        url: `/note/${noteId}`
     }).then(function(data) {
         console.log("comment deleted")
     })
+});
+
+  
+$("#scrape-btn").on("click", function(event) {
+    event.preventDefault();
+
+    $.ajax({
+        method: "GET",
+        url: `/scrape`,
+ 
+    }).then(function(data) {
+        console.log(data);
+        location.reload();
+    })
+
 })
-
-    //(While clicked on article) - On click of delete comment
-        //DELETE - comment that was clicked on (Optimistic UI - hide?)
-        //Refresh the articles page (to show comment was removed)
-
     //On click of Scrape
         //GET - New articles from reddit, function(response) {
 

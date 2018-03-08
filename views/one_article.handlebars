@@ -1,12 +1,11 @@
 <nav class="navbar">
-    <a class="navbar-brand" href="/articles">reddit r/WorldNews Scraper</a>
-    <button class="btn btn-danger" id="scrape" type="submit">Scrape New Headlines</button>
+    <a class="navbar-brand" href="/">reddit r/WorldNews Scraper</a>
 
 </nav>
 
 <div class="container-fluid">
     <div class="row full_article_row">
-        <div class="card col-sm-8 article-panel">
+        <div class="card col-sm-7 one-article-panel">
             <div class="card-header">
                 <h1>r/WorldNews Top Headlines</h1>
             </div>
@@ -16,7 +15,10 @@
 
         </div>
 
-        <div class="card col-sm-4 notes-column">
+        <div class="card col-sm-4 notes-column ml-auto">
+            <div class="card-header">
+                <h3>Article Notes</h3>
+            </div>
             <form>
                 {{title}}
                 <div class="form-group">
@@ -40,14 +42,24 @@
 
             </form>
 
+        </div>
+
+    </div>
+    {{!-- End Row --}}
+
+    <div class="row justify-content-md-center">
+        <div class="card col-sm-11 comment-card">
+            <div class="card-header">
+                <h3>Comments</h3>
+            </div>
             {{#if notes}}
             <div>
                 {{#each notes}}
                 <div class="comment-div">
                     <p>{{this.username}}</p>
-                    <br><p>{{this.title}}</p>
-                    <br><p>{{this.text}}</p>
-                    <br>
+                    <p>{{this.title}}</p>
+                    <p>{{this.text}}</p>
+
                     <button type="submit" class="btn btn-primary mb-2 delete-note" data-id={{this._id}}>Delete Note</button>
 
                 </div>
@@ -55,9 +67,14 @@
                 {{/each }}
             </div>
             {{/if}}
+             {{#unless notes}}
+            <p>Be the First to Add A Note ...</p>
+
+            {{/unless}}
 
 
         </div>
 
     </div>
 </div>
+{{!-- end container --}}

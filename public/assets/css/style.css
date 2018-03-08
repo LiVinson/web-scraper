@@ -14,31 +14,73 @@
 }
 .card-header{
     text-align:center;
+    padding-left:0px;
 }
 
-
+/* All Articles, Main Manel */
 .article-panel{
-    border: solid 3px black;
+    border: solid 2px black;
     margin-left:5%;
     margin-right:5%;
     margin-bottom:15px;
     
 
 }
-.notes-column{
-    border: solid 1px green;
+
+/* One Article, Main Panel */
+.one-article-panel{
+    border: solid 2px black;
+    margin-left:10px;
+    padding-left:0px;
+    padding-right:0px;
+    
     
 
 }
 
-.iframe-parent{
-    height: 100%;
-}
-.display_article{
-    width: 100%;
-    height:100%;
+/* One Article, notes Div  */
+.notes-column{
+    border: solid 2px black;
+    margin-right:10px;
+        margin-left:15px;
+    margin-right:15px;
+    
+
 }
 
+/* Div to hold all comments */
+.comment-card{
+    border: solid 2px black;
+    /* margin-left:5px;
+    margin-right:5px; */
+    margin-top:15px;
+}
+
+/* DIv for each note associated with an article */
+
+.comment-div{
+    border-bottom: solid 2px black;
+}
+
+.iframe-parent{
+    height: 100%;
+    padding-left:0px;
+    padding-right:0px;
+}
+
+/* One Article - iframe */
+.display_article{
+    width: 95%;
+    height:100%;
+    display: block;
+    margin: 0 auto;
+    padding-left:0px;
+    padding-right:0px;
+    
+
+}
+
+/* One Article - iframe row */
 .full_article_row{
     height: 90vh;
 }
