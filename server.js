@@ -27,7 +27,7 @@ app.use(express.static("public"));
 var exphbs = require("express-handlebars");
 
 app.engine("handlebars", exphbs({
-  defaultLayout: "main"
+    defaultLayout: "main"
 }));
 app.set("view engine", "handlebars");
 
@@ -70,15 +70,31 @@ app.get("/scrape", function (req, res) {
         })
 });
 
-//GET
+//GET all Articles from article collection for rendering
 
-app.get("/articles", function(req, res) {
-    db.Article.find({}).then(function(results) {
+app.get("/articles", function (req, res) {
+    db.Article.find({}).then(function (results) {
         // console.log(results);
         var hbsObject = {
             article: results
         };
-        res.render("index", hbsObject);
+        res.render("all_articles", hbsObject);
+    });
+});
+
+//GET specified Articles from article collection for rendering
+
+app.get("/articles/:id", function (req, res) {
+    db.Article.find({
+        _id: req.params.id
+    }).then(function (results) {
+        console.log(results);
+        // var hbsObject = {
+        //     article: results
+        // };
+        res.render("one_article", results[0]);
+    }).catch(function (err) {
+        res.json(err);
     });
 });
 

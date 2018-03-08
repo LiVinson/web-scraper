@@ -1,0 +1,15 @@
+.container {
+    border: solid 1px red;
+    margin-left:10px;
+    margin-right:10px;
+
+}
+
+.card{
+    border: solid 1px blue;
+
+}
+
+.display_article{
+    width: 100%;
+}
