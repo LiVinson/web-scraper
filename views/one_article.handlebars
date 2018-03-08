@@ -1,6 +1,6 @@
-<nav class="navbar navbar-light bg-light">
-    <a class="navbar-brand" href="/articles">Reddit r/WorldNews Scraper</a>
-    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+<nav class="navbar">
+    <a class="navbar-brand" href="/articles">reddit r/WorldNews Scraper</a>
+    <button class="btn btn-danger" id="scrape" type="submit">Scrape New Headlines</button>
 
 </nav>
 
@@ -8,7 +8,7 @@
     <div class="row full_article_row">
         <div class="card col-sm-8 article-panel">
             <div class="card-header">
-                <h1>r/WorldNews Tops Headlines</h1>
+                <h1>r/WorldNews Top Headlines</h1>
             </div>
             <div class="card-body iframe-parent">
                 <iframe class="display_article" src={{link}}></iframe>
@@ -19,8 +19,6 @@
         <div class="card col-sm-4 notes-column">
             <form>
                 {{title}}
-
-
                 <div class="form-group">
                     <label for="username">Username
                         <i>optional</i>
