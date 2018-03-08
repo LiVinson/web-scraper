@@ -18,15 +18,48 @@ $.getJSON("/articles", function(data) {
 //     })
 // })
 
-    //On click of article:
-        //GET body of article 
-        //Show comment box w/ article title
-        //Display any associated comments
 
-    //On click of submit (comments):
-        //Capture values and save
-        //POST reqeust (send comments)
-        //Display comments on the screen (optimistic UI)
+$("#add-note-btn").on("click", function(event) {
+    event.preventDefault();
+
+    var username = $("#username").val().trim();
+    var title = $("#note-title").val().trim();
+    var text = $("#note-text").val().trim();
+    //Determine front end validation
+    var comment = {
+        username,
+        title,
+        text
+    }
+    //Add optimistic UI
+    var id = $(this).attr("data-id");
+
+    $.ajax({
+        method: "POST",
+        url: `/articles/${id}`,
+        data: comment
+    }).then(function(data) {
+        console.log(data);
+        location.reload();
+    })
+
+})
+
+$(".delete-note").on("click", function(event) {
+    console.log("delete clicked");
+    event.preventDefault();
+    var noteId = $(this).attr("data-id");
+    
+    $(this).parents('div.comment-div')hide();
+
+
+    $ajax({
+        method: "DELETE",
+        url: `note/${noteId}`
+    }).then(function(data) {
+        console.log("comment deleted")
+    })
+})
 
     //(While clicked on article) - On click of delete comment
         //DELETE - comment that was clicked on (Optimistic UI - hide?)

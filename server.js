@@ -87,7 +87,7 @@ app.get("/articles", function (req, res) {
 app.get("/articles/:id", function (req, res) {
     db.Article.find({
         _id: req.params.id
-    }).then(function (results) {
+    }).populate("notes").then(function (results) {
         console.log(results);
         // var hbsObject = {
         //     article: results
@@ -96,6 +96,36 @@ app.get("/articles/:id", function (req, res) {
     }).catch(function (err) {
         res.json(err);
     });
+});
+
+//POST New Comment for specified article:
+
+app.post("/articles/:id", function (req, res) {
+    db.Note.create(req.body).
+    then(function (dbNote) {
+        return db.Article.findOneAndUpdate({
+                _id: req.params.id
+            }, { $push:
+                {notes: dbNote._id}
+            }, {
+                new: true
+            }).then(function (article) {
+                res.send("New comment added")
+            })
+            .catch(function (err) {
+                res.json(err);
+            });
+    });
+});
+
+
+//DELETE the clicked note:
+
+app.delete("/note/:id", function (req, res) {
+    db.Note.remove({_id: req.params.id}, function(response) {
+        console.log(response);
+    })
+
 });
 
 // Start the server
