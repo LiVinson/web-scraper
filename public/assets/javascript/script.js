@@ -50,7 +50,7 @@ $(".delete-note").on("click", function(event) {
     event.preventDefault();
     var noteId = $(this).attr("data-id");
     
-    $(this).parents('div.comment-div')hide();
+    $(this).parents('div.comment-div').hide();
 
 
     $ajax({
