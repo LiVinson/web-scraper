@@ -1,5 +1,6 @@
 <nav class="navbar navbar-light bg-light">
-    <a class="navbar-brand" href="#">Reddit r/WorldNews Scraper</a>
+    <a class="navbar-brand" href="/articles">Reddit r/WorldNews Scraper</a>
+    <button class="btn btn-outline-success my-2 my-sm-0" id="scrape" type="submit">Scrape New Articles</button>
     <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
 
 </nav>
@@ -16,7 +17,7 @@
                     <li class="list-group-item">{{this.title}}
                         <br> Source: {{this.source}}
                         <br>
-                        <a href={{this.link}} id={{this._id}} class="btn btn-primary full_article">View Full Article</a>
+                        <a href="/articles/{{this._id}}" id={{this._id}} class="btn btn-primary full_article">View Full Article</a>
                         <a href="#" class="btn btn-primary">Add a Comment</a>
                     </li>
                     {{/each}}

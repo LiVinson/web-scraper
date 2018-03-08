@@ -1,8 +1,22 @@
-//On home page,
+//On home page - GET request for all articles from Article collection
 $.getJSON("/articles", function(data) {
     console.log(data);
 });
 
+//BELOW - Not Needed as the button is directed to the correct endpoint - determine which is preferred.
+
+
+//On Click of view full article button, request link to full article for rendering
+// $(".full_article").on("click", function(event) {
+//     var thisBtn = $(this).attr("id");
+//     console.log(thisBtn);
+//     $.ajax({
+//         method: "GET",
+//         url: `/articles/${thisBtn}`
+//     }).then(function(data) {
+//         console.log(data);
+//     })
+// })
 
     //On click of article:
         //GET body of article 
