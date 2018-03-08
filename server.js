@@ -59,7 +59,7 @@ app.get("/scrape", function (req, res) {
                 //Create a new Article for each scraped result
                 db.Article.create(results)
                     .then(function (response) {
-                        // console.log(response);
+                        res.send("scrape complete!")
                     })
                     .catch(function (err) {
                         return res.json(err)
@@ -72,7 +72,7 @@ app.get("/scrape", function (req, res) {
 
 //GET all Articles from article collection for rendering
 
-app.get("/articles", function (req, res) {
+app.get("/", function (req, res) {
     db.Article.find({}).then(function (results) {
         // console.log(results);
         var hbsObject = {
@@ -105,8 +105,10 @@ app.post("/articles/:id", function (req, res) {
     then(function (dbNote) {
         return db.Article.findOneAndUpdate({
                 _id: req.params.id
-            }, { $push:
-                {notes: dbNote._id}
+            }, {
+                $push: {
+                    notes: dbNote._id
+                }
             }, {
                 new: true
             }).then(function (article) {
@@ -122,9 +124,15 @@ app.post("/articles/:id", function (req, res) {
 //DELETE the clicked note:
 
 app.delete("/note/:id", function (req, res) {
-    db.Note.remove({_id: req.params.id}, function(response) {
+    db.Note.remove({
+        _id: req.params.id
+    }, function (response) {
         console.log(response);
-    })
+    }).then(function (article) {
+        res.send("comment Deleted")
+    }).catch(function (err) {
+        res.json(err);
+    });
 
 });
 
