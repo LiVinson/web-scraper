@@ -1,15 +1,35 @@
-.container {
+
+
+.navbar{
+    margin-bottom:20px;
+}
+
+.container-fluid {
     border: solid 1px red;
-    margin-left:10px;
-    margin-right:10px;
+    /* margin-left:10px;
+    margin-right:10px; */
 
 }
 
-.card{
+.article-panel{
     border: solid 1px blue;
+    
+
+}
+.notes-column{
+    border: solid 1px green;
+    
 
 }
 
+.iframe-parent{
+    height: 100%;
+}
 .display_article{
     width: 100%;
+    height:100%;
+}
+
+.full_article_row{
+    height: 90vh;
 }

@@ -4,20 +4,61 @@
 
 </nav>
 
-<div class="container">
-    <div class="row">
-        <div class="card col-xs-8 article-panel">
+<div class="container-fluid">
+    <div class="row full_article_row">
+        <div class="card col-sm-8 article-panel">
             <div class="card-header">
                 <h1>r/WorldNews Tops Headlines</h1>
             </div>
-            <div class="card-body">
-               <iframe class="display_article" src={{link}}></iframe>
+            <div class="card-body iframe-parent">
+                <iframe class="display_article" src={{link}}></iframe>
             </div>
 
         </div>
 
-        <div class="col-xs-4">
-            Notes will go here
+        <div class="card col-sm-4 notes-column">
+            <form>
+                {{title}}
+
+
+                <div class="form-group">
+                    <label for="username">Username
+                        <i>optional</i>
+                    </label>
+                    <input class="form-control" id="username" placeholder="JaneDoe123">
+                </div>
+
+                <div class="form-group">
+                    <label for="note-title">Note Title</label>
+                    <input class="form-control" id="note-title" placeholder="Questions about the article...">
+                </div>
+
+                <div class="form-group">
+                    <label for="note-text">Article Notes</label>
+                    <textarea class="form-control a" id="note-text" rows="5"></textarea>
+                </div>
+
+                <button type="submit" class="btn btn-primary mb-2" id="add-note-btn" data-id={{_id}}>Add Note</button>
+
+            </form>
+
+            {{#if notes}}
+            <div>
+                {{#each notes}}
+                <div class="comment-div">
+                    <p>{{this.username}}</p>
+                    <br><p>{{this.title}}</p>
+                    <br><p>{{this.text}}</p>
+                    <br>
+                    <button type="submit" class="btn btn-primary mb-2 delete-note" data-id={{this._id}}>Delete Note</button>
+
+                </div>
+
+                {{/each }}
+            </div>
+            {{/if}}
+
+
         </div>
 
     </div>

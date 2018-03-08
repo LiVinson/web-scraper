@@ -3,12 +3,15 @@ var mongoose = require("mongoose");
 var Schema = mongoose.Schema;
 
 var NoteSchema = new Schema({
-
+    username: {
+        type:String,
+        default:"Guest User"
+    },
     title: {
         type: String,
     },
 
-    body: {
+    text: {
         type: String,
         required: true
     }
