@@ -1,19 +1,10 @@
 const express = require("express");
 const router = express.Router();
-const db = require("../models/");
-const mongoose = require("mongoose");
+const article_controller = require("../controllers/article")
+
+
 
 //GET all Articles from article collection for rendering
-
-router.get("/", function (req, res) {
-    db.Article.find({}).then(function (results) {
-        // console.log(results);
-        var hbsObject = {
-            article: results
-        };
-        res.render("all_articles", hbsObject);
-    });
-});
-
+router.get("/", article_controller.getHeadlines);
 
 module.exports = router;

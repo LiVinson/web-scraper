@@ -20,7 +20,7 @@ $.getJSON("/", function(data) {
 
 
 $("#add-note-btn").on("click", function(event) {
-    event.preventDefault();
+    // event.preventDefault();
 
     var username = $("#username").val().trim();
     var title = $("#note-title").val().trim();
@@ -47,7 +47,7 @@ $("#add-note-btn").on("click", function(event) {
 
 $(".delete-note").on("click", function(event) {
     console.log("delete clicked");
-    event.preventDefault();
+    // event.preventDefault();
     var noteId = $(this).attr("data-id");
     console.log(noteId)
     $(this).parents('div.comment-div').hide();
@@ -61,23 +61,20 @@ $(".delete-note").on("click", function(event) {
     })
 });
 
-  
+//On click of Scrape button: 
 $("#scrape-btn").on("click", function(event) {
-    event.preventDefault();
-
+    
+    console.log("scrape button!")
+    //Display "scraping reddit message"
     $.ajax({
         method: "GET",
         url: `/scrape`,
  
     }).then(function(data) {
         console.log(data);
-        location.reload();
+        location.reload("/");
     })
 
 })
-    //On click of Scrape
-        //GET - New articles from reddit, function(response) {
 
-            //Redirect to home page (which displays all articles)
-        //}
         
