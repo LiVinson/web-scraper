@@ -2,7 +2,7 @@ const express = require("express"); //server
 const bodyParser = require("body-parser");
 const logger = require("morgan"); //logs HTTP methods
 const mongoose = require("mongoose");
-
+const path = require("path");
 // Require all models
 const db = require("./models");
 
