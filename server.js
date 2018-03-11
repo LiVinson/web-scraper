@@ -1,15 +1,15 @@
 const express = require("express"); //server
 const bodyParser = require("body-parser");
 const logger = require("morgan"); //logs HTTP methods
-// const mongoose = require("mongoose");
-
+const mongoose = require("mongoose");
+const path = require("path");
 // Require all models
 const db = require("./models");
 
-const PORT = process.env.PORT || 3000;
-
 // Initialize Express
 const app = express();
+
+const PORT = process.env.PORT || 3000;
 
 // Use morgan logger for logging requests
 app.use(logger("dev"));
@@ -18,7 +18,7 @@ app.use(bodyParser.urlencoded({
     extended: false
 }));
 // Use express.static to serve the public folder as a static directory
-app.use(express.static("public"));
+app.use(express.static(__dirname + "/public"));
 
 const exphbs = require("express-handlebars");
 
