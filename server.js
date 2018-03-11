@@ -1,7 +1,7 @@
 const express = require("express"); //server
 const bodyParser = require("body-parser");
 const logger = require("morgan"); //logs HTTP methods
-const mongoose = require("mongoose");
+// const mongoose = require("mongoose");
 
 // Require all models
 const db = require("./models");
@@ -20,7 +20,7 @@ app.use(bodyParser.urlencoded({
 // Use express.static to serve the public folder as a static directory
 app.use(express.static("public"));
 
-var exphbs = require("express-handlebars");
+const exphbs = require("express-handlebars");
 
 app.engine("handlebars", exphbs({
     defaultLayout: "main"
@@ -32,7 +32,7 @@ app.set("view engine", "handlebars");
 
 // By default mongoose uses callbacks for async queries, we're setting it to use promises (.then syntax) instead
 // Connect to the Mongo DB
-const MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/mongoHeadlines";
+let MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/mongoHeadlines";
 mongoose.Promise = Promise;
 mongoose.connect(MONGODB_URI);
 
