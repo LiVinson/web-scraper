@@ -7,18 +7,17 @@ const exphbs = require("express-handlebars");
 // Initialize Express
 const app = express();
 
-const PORT = process.env.PORT || 3000;
+const routes = require('./routes');
 
-// Require all models
-const models = require("./models");
+// Use express.static to serve the public folder as a static directory
+app.use(express.static(__dirname + "/public"));
 
 // Use morgan logger for logging requests
 app.use(logger("dev"));
-// Use body-parser for handling form submissions
-app.use(express.urlencoded({extended : false}));
-app.use(express.json());
-// Use express.static to serve the public folder as a static directory
-app.use(express.static(__dirname + "/public"));
+
+
+const PORT = process.env.PORT || 3000;
+
 
 
 
@@ -27,16 +26,13 @@ app.engine("handlebars", exphbs({
 }));
 app.set("view engine", "handlebars");
 
-//Require routes:
+// Use body-parser for handling form submissions
+app.use(express.urlencoded({extended : false}));
+app.use(express.json());
 
-const routes = require('./routes');
 
-// var html_routes = require("./routes/html_routes");
-// var api_routes = require("./routes/api_routes");
 app.use(routes);
 
-// app.use(html_routes);
-// app.use(api_routes);
 
 // If deployed, use the deployed database. Otherwise use the local mongoHeadlines database
 var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/mongoHeadlines";
