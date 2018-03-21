@@ -38,15 +38,15 @@ app.use('/', routes);
 // app.use(html_routes);
 // app.use(api_routes);
 
+// If deployed, use the deployed database. Otherwise use the local mongoHeadlines database
+var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/mongoHeadlines";
 
-
-
-// By default mongoose uses callbacks for async queries, we're setting it to use promises (.then syntax) instead
+// Set mongoose to leverage built in JavaScript ES6 Promises
 // Connect to the Mongo DB
-mongoose.Promise = global.Promise;
+mongoose.Promise = Promise;
+mongoose.connect(MONGODB_URI);
 
-mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/mongoHeadlines");
-// Start the server
-app.listen(PORT, function () {
-    console.log("App running on port " + PORT + "!");
+// Listen on the port
+app.listen(PORT, function() {
+  console.log("Listening on port: " + PORT);
 });
