@@ -1,12 +1,10 @@
-module.exports = function () {
+
     var router = require("express").Router();
 
+    var api_routes = require("./api_routes.js");
+    router.use("/api", api_routes);
 
-    var api_routes = require("./api_routes");
-    router.use("/", api_routes);
-
-    var html_routes = require("./html_routes");
+    var html_routes = require("./html_routes.js");
     router.use("/", html_routes);
 
-    return router;
-}
+    module.exports = router;

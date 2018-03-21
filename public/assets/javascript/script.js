@@ -36,7 +36,7 @@ $("#add-note-btn").on("click", function(event) {
 
     $.ajax({
         method: "POST",
-        url: `/articles/${id}`,
+        url: `/api/articles/${id}`,
         data: comment
     }).then(function(data) {
         console.log(data);
@@ -55,7 +55,7 @@ $(".delete-note").on("click", function(event) {
 
     $.ajax({
         method: "DELETE",
-        url: `/note/${noteId}`
+        url: `/api/note/${noteId}`
     }).then(function(data) {
         console.log("comment deleted")
     })
@@ -68,7 +68,7 @@ $("#scrape-btn").on("click", function(event) {
     //Display "scraping reddit message"
     $.ajax({
         method: "GET",
-        url: `/scrape`,
+        url: `/api/scrape`,
  
     }).then(function(data) {
         console.log(data);

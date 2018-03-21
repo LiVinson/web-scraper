@@ -29,7 +29,7 @@ app.set("view engine", "handlebars");
 
 //Require routes:
 
-const routes = require('./routes')();
+const routes = require('./routes');
 
 // var html_routes = require("./routes/html_routes");
 // var api_routes = require("./routes/api_routes");
