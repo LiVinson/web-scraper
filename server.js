@@ -33,7 +33,7 @@ const routes = require('./routes');
 
 // var html_routes = require("./routes/html_routes");
 // var api_routes = require("./routes/api_routes");
-app.use('/', routes);
+app.use(routes);
 
 // app.use(html_routes);
 // app.use(api_routes);
