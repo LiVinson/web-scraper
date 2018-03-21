@@ -19,8 +19,6 @@ app.use(logger("dev"));
 const PORT = process.env.PORT || 3000;
 
 
-
-
 app.engine("handlebars", exphbs({
     defaultLayout: "main"
 }));
